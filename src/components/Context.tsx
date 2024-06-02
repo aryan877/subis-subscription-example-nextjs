@@ -92,12 +92,15 @@ export const EthereumProvider = ({
     }
   };
 
-  const onNetworkChange = async (data: { chainId: BigInt; name: string }) => {
-    const chainId = parseInt(data.chainId.toString());
-    const currentChain = chains.find((chain: any) => chain.id === chainId);
+  const onNetworkChange = async (chainId: string) => {
+    const parsedChainId = parseInt(chainId, 16);
+    const currentChain = chains.find(
+      (chain: any) => chain.id === parsedChainId
+    );
+    console.log(currentChain);
     setNetwork(
       currentChain ?? {
-        id: chainId,
+        id: parsedChainId,
         name: null,
         rpcUrl: null,
         unsupported: true,
@@ -113,7 +116,7 @@ export const EthereumProvider = ({
     if (accounts.length > 0) {
       onAccountChange(accounts);
       getEthereumContext()?.on("accountsChanged", onAccountChange);
-      web3Provider?.on("network", onNetworkChange);
+      getEthereumContext()?.on("chainChanged", onNetworkChange);
     } else {
       throw new Error("No accounts found");
     }
@@ -126,7 +129,7 @@ export const EthereumProvider = ({
     });
     setNetwork(null);
     getEthereumContext()?.off("accountsChanged", onAccountChange);
-    web3Provider?.off("network", onNetworkChange);
+    getEthereumContext()?.off("chainChanged", onNetworkChange);
   };
 
   useEffect(() => {

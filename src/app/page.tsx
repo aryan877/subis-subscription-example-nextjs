@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useEthereum } from "../components/Context";
 import { CheckCircle, AlertTriangle } from "lucide-react";
+import { NetworkSwitcher } from "../components/NetworkSwitcher";
 
 interface Plan {
   planId: string;
@@ -19,7 +20,7 @@ function SignMessage() {
   const [retrievingPlan, setRetrievingPlan] = useState(false);
   const [success, setSuccess] = useState(false);
   const [plan, setPlan] = useState<Plan | null>(null);
-  const { getSigner } = useEthereum();
+  const { getSigner, account } = useEthereum();
 
   const handleSignMessage = async () => {
     try {
@@ -30,7 +31,7 @@ function SignMessage() {
 
       const signer = await getSigner();
       if (signer) {
-        const message = "Hello, World!";
+        const message = "Hello, ZKSync!";
         const signedMessage = await signer.signMessage(message);
         setSignature(signedMessage);
         const address = await signer.getAddress();
@@ -124,6 +125,7 @@ function SignMessage() {
             </div>
           </div>
         )}
+        <NetworkSwitcher />
       </div>
     </div>
   );
