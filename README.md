@@ -1,15 +1,11 @@
-This is a [zkSync](https://zksync.io) + [ethers v6](https://docs.ethers.org/v6/) + [Next.js](https://nextjs.org) project bootstrapped with [`zksync-cli`](https://github.com/matter-labs/zksync-cli)
+## Subscription Example README
 
-# Getting Started
+The Subis subscription example repository demonstrates how to use the Subis API to verify user subscriptions in a Next.js application. It showcases an API endpoint that:
 
-Run `npm run dev` in your terminal, and then open [localhost:3000](http://localhost:3000) in your browser.
+- Receives a signed transaction from the connected wallet
+- Verifies the signature to ensure the user is subscribed
+- Grants access to the service based on the subscription status
 
-Once the webpage has loaded, changes made to files inside the `src/` directory (e.g. `src/pages/index.tsx`) will automatically update the webpage.
+This example serves as a reference for integrating Subis into applications where the actual service is provided to subscribed users.
 
-# Learn more
-
-To learn more about [zkSync](https://zksync.io) or [ethers v6](https://docs.ethers.org/v6/), check out the following resources:
-
-- [zkSync Documentation](https://era.zksync.io/docs/dev) – learn about zkSync features and API.
-- [ethers v6 Documentation](https://docs.ethers.org/v6/) – learn about Ethers v6 and API.
-- [Next.js Documentation](https://nextjs.org/docs) learn about Next.js features and API.
+The example interacts with the deployed Subscription Manager contract to verify subscriptions and ensure only eligible users can access the service.
